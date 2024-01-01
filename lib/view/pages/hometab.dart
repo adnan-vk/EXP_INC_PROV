@@ -65,7 +65,6 @@ class HomeTab extends StatelessWidget {
                   child: Consumer2<DbProvider,HomeProvider>(
                    builder:(context, dbvalue, homevalue, child) {
                     final datavalue=dbvalue.transaction;
-                    //  final display = homevalue.search.isNotEmpty ? homevalue.searchList : datavalue;
                      return homevalue.search.isNotEmpty ? Lottie.asset('assets/anm1.json') : 
                      ListView.builder(
                        itemBuilder: (context, index) {
@@ -112,7 +111,6 @@ class HomeTab extends StatelessWidget {
                                          children: [
                                            IconButton(onPressed: (){
                                             Provider.of<HomeProvider>(context,listen: false).delete(index,context);
-                                            // Provider.bal();
                                            }, 
                                            icon: const Icon(Icons.delete) ),
                                            IconButton(

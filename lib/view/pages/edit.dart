@@ -6,12 +6,6 @@ import 'package:mini/controller/editprovider.dart';
 import 'package:mini/model/model.dart';
 import 'package:provider/provider.dart';
 
-
-final decr = TextEditingController();
-final type = TextEditingController();
-final amt = TextEditingController();
-TextEditingController date = TextEditingController();
-
 class Edit extends StatefulWidget {
   final String decr;
   final String type;
@@ -35,11 +29,11 @@ class _EditState extends State<Edit> {
   @override
   void initState(){
     super.initState();
-
-    decr.text = widget.decr;
-    type.text = widget.type;
-    amt.text = widget.amount;
-    date.text = widget.date;
+    final prov = Provider.of<EditProvider>(context,listen: false);
+    prov.decr.text = widget.decr;
+    prov.type.text = widget.type;
+    prov.amt.text = widget.amount;
+    prov.date.text = widget.date;
   }
   @override
   Widget build(BuildContext context) {
@@ -79,7 +73,7 @@ class _EditState extends State<Edit> {
                      Column(
                       children: [
                         TextFormField(
-                          controller: decr,
+                          controller: value.decr,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20)
@@ -105,15 +99,17 @@ class _EditState extends State<Edit> {
                               value: "INCOME",
                               child:Text("INCOME",style: TextStyle(
                                 color: Colors.green
-                              ),)),
+                              ),)
+                            ),
                             DropdownMenuItem(
                               value: "EXPENCE",
-                              child:Text("EXPENCE",style: TextStyle(color: Colors.red),)),
+                              child:Text("EXPENCE",style: TextStyle(color: Colors.red),)
+                            ),
                           ],
                         ),
                         const SizedBox(height: 10,),
                         TextFormField(
-                          controller: amt,
+                          controller: value.amt,
                           keyboardType: TextInputType.number,
                           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                           decoration: InputDecoration(
@@ -126,7 +122,7 @@ class _EditState extends State<Edit> {
                         const SizedBox(height: 10,),
                         TextFormField(
                           readOnly: true,
-                          controller: date,
+                          controller: value.date,
                           keyboardType: TextInputType.datetime,
                           decoration: InputDecoration(
                             
@@ -138,11 +134,11 @@ class _EditState extends State<Edit> {
                           ),
                           onTap: () async{
                             DateTime? pickdate =await showDatePicker(
-                              context: context, 
+                              context: context,
                               initialDate: DateTime.now(), 
                               firstDate: DateTime(2000), lastDate: DateTime(2100));
                               if(pickdate != null){
-                                  date.text = DateFormat.yMd().format(pickdate);
+                                  value.date.text = DateFormat.yMd().format(pickdate);
                               }
                           },
                         ),
@@ -152,11 +148,9 @@ class _EditState extends State<Edit> {
                             backgroundColor: MaterialStatePropertyAll(Colors.yellow),
                             side: MaterialStatePropertyAll(BorderSide(width: 2,color: Color.fromARGB(255, 3, 45, 79)))
                             ),
-                          onPressed: (){
+                          onPressed: ()async{
                             Navigator.pop(context);
-                            final model = TransactionModel(discription: widget.decr, type: widget.type, amount: widget.amount, date: widget.date);
-                            Provider.of<DbProvider>(context).updateTransaction(model, model.index);
-                            // updatetransaction(widget.index);
+                            await Update();
                           },
                         child: Padding(
                           padding:  EdgeInsets.symmetric(
@@ -175,5 +169,10 @@ class _EditState extends State<Edit> {
         ),
       ),
     );
+  }
+  Future <void> Update()async{
+    final upd = Provider.of<EditProvider>(context,listen: false);
+    final data = TransactionModel(discription: upd.decr.text, type: upd.type.text, amount: upd.amt.text, date: upd.date.text);
+    await Provider.of<DbProvider>(context,listen: false).updateTransaction(data, widget.index);
   }
 }

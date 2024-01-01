@@ -128,6 +128,7 @@ class Settings extends StatelessWidget {
     final sharedpre=await SharedPreferences.getInstance();
     await sharedpre.clear();
 
+    // ignore: use_build_context_synchronously
     Navigator.of(ctx).pushAndRemoveUntil(
         MaterialPageRoute(builder: (ctx) => const Login()), (route) => true,);
   }
@@ -135,7 +136,7 @@ class Settings extends StatelessWidget {
   sheet(BuildContext context){
     return showDialog(context: context, builder: (context) {
       return AlertDialog(
-        title: Column(
+        title: const Column(
           children: [
             Text("LOG OUT"),
             Text("DO YOU WANT TO LOG OUT FROM THIS USER",style: TextStyle(fontWeight: FontWeight.w300,fontSize: 15),textAlign: TextAlign.center,),
@@ -143,15 +144,15 @@ class Settings extends StatelessWidget {
         ),
         actions: [
           ElevatedButton(
-                style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(const Color.fromARGB(255, 3, 45, 79)),),
+                style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 3, 45, 79)),),
                   onPressed: (){
                   Navigator.pop(context);
-                }, child: Text("CANCEL",)),
+                }, child: const Text("CANCEL",)),
                 ElevatedButton(
-                  style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(const Color.fromARGB(255, 3, 45, 79))),
+                  style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 3, 45, 79))),
                   onPressed: (){
                   signout(context);
-                }, child: Text("LOGOUT",)),
+                }, child: const Text("LOGOUT",)),
         ],
       );
     },);

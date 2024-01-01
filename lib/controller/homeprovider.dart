@@ -60,6 +60,7 @@ delete(int index, BuildContext context){
                 }, child: const Text("DELETE",)),
         ],
       );
-    },);
+    },
+    );
   }
 }

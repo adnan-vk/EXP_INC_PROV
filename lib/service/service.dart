@@ -17,8 +17,8 @@ class DbService{
     await transactiondb.deleteAt(index);
   }
 
-  Future updateTransaction(TransactionModel value,index)async{
+  Future updateTransaction(TransactionModel value , index)async{
     final transactiondb = await Hive.openBox<TransactionModel>("transaction_db");
-    await transactiondb.putAt(index , value);
+    await transactiondb.putAt(index, value);
   }
 }

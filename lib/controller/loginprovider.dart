@@ -10,8 +10,7 @@ bool dataMatched = true;
 
 final formKey = GlobalKey<FormState>();
 
-void checklogin(BuildContext ctx)async{ 
-  // final provider = Provider.of<LoginProvider>(context, listen: false);
+void checklogin(BuildContext ctx)async{
   final _username = userController.text;
   final _password = passwordController.text;
   if(_username == "ADNAN" && _password == "123"){
