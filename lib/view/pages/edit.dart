@@ -150,7 +150,7 @@ class _EditState extends State<Edit> {
                             ),
                           onPressed: ()async{
                             Navigator.pop(context);
-                            await Update();
+                            await update();
                           },
                         child: Padding(
                           padding:  EdgeInsets.symmetric(
@@ -170,7 +170,7 @@ class _EditState extends State<Edit> {
       ),
     );
   }
-  Future <void> Update()async{
+  Future <void> update()async{
     final upd = Provider.of<EditProvider>(context,listen: false);
     final data = TransactionModel(discription: upd.decr.text, type: upd.type.text, amount: upd.amt.text, date: upd.date.text);
     await Provider.of<DbProvider>(context,listen: false).updateTransaction(data, widget.index);

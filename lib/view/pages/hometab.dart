@@ -6,7 +6,6 @@ import 'package:mini/view/pages/details.dart';
 import 'package:mini/view/pages/edit.dart';
 import 'package:provider/provider.dart';
 
-
 class HomeTab extends StatelessWidget {
   const HomeTab({Key? key}) : super(key: key);
 

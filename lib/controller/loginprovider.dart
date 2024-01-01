@@ -10,12 +10,12 @@ bool dataMatched = true;
 
 final formKey = GlobalKey<FormState>();
 
-void checklogin(BuildContext ctx)async{
-  final _username = userController.text;
-  final _password = passwordController.text;
-  if(_username == "ADNAN" && _password == "123"){
-     final _srdprf=await SharedPreferences.getInstance();
-     await _srdprf.setBool(savekeyname, true);
+void checklogin(ctx)async{
+  final username = userController.text;
+  final password = passwordController.text;
+  if(username == "ADNAN" && password == "123"){
+     final srdprf=await SharedPreferences.getInstance();
+     await srdprf.setBool(savekeyname, true);
     Navigator.of(ctx).pushReplacement(MaterialPageRoute(builder: (ctx1)=> const Bottom())); 
   }else{
       dataMatched = false;

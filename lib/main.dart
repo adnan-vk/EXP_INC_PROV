@@ -13,8 +13,8 @@ import 'package:provider/provider.dart';
 const savekeyname = "user login";
 Future<void> main(List<String> args)async {
   await Hive.initFlutter();
-  if(!Hive.isAdapterRegistered(transactionmodelAdapter().typeId)){
-    Hive.registerAdapter(transactionmodelAdapter());
+  if(!Hive.isAdapterRegistered(TransactionModelAdapter().typeId)){
+    Hive.registerAdapter(TransactionModelAdapter());
   }
   runApp(const MyApp());
 }

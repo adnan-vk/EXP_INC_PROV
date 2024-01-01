@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:mini/main.dart';
 import 'package:mini/widgets/bottombar.dart';
@@ -44,9 +46,9 @@ class _SplashState extends State<Splash> {
     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const Bottom()));
   }
   void checkuserlogin()async{
-    final _sharedprf=await SharedPreferences.getInstance();
-    final _userlogin=_sharedprf.getBool(savekeyname);
-    if(_userlogin==null || _userlogin==false){
+    final sharedprf=await SharedPreferences.getInstance();
+    final userlogin=sharedprf.getBool(savekeyname);
+    if(userlogin==null || userlogin==false){
       gotoLogin();
     }else{
       gotoHome();

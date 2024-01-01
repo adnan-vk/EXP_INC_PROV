@@ -132,8 +132,6 @@ class Login extends StatelessWidget {
                               onPressed: (){
                                 if(value.formKey.currentState!.validate()){
                                  value.checklogin(context);
-                                }else{
-                                  print("data is empty");
                                 }
                               }, 
                             child: Padding(
