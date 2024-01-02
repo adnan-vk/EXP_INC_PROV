@@ -8,11 +8,11 @@ class Details extends StatelessWidget {
   final String date;
   final int index;
   
-  const Details({super.key, 
-  required this.decr, 
-  required this.type, 
-  required this.amount, 
-  required this.date, 
+  const Details({super.key,
+  required this.decr,
+  required this.type,
+  required this.amount,
+  required this.date,
   required this.index});
 
   @override

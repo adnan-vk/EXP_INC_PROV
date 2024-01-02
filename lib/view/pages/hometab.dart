@@ -33,7 +33,8 @@ class HomeTab extends StatelessWidget {
                   builder: (context, provider, child) => 
                   TextFormField(
                     onChanged: (value) {
-                        provider.search= value;
+                        provider.search = value;
+                        provider.searchResult(context);
                     },
                     decoration: InputDecoration(
                       focusedBorder: OutlineInputBorder(
@@ -63,11 +64,14 @@ class HomeTab extends StatelessWidget {
                 Expanded(
                   child: Consumer2<DbProvider,HomeProvider>(
                    builder:(context, dbvalue, homevalue, child) {
-                    final datavalue=dbvalue.transaction;
-                     return homevalue.search.isNotEmpty ? Lottie.asset('assets/anm1.json') : 
+                    final list = dbvalue.filtered.isNotEmpty
+                      ? dbvalue.filtered
+                      : dbvalue.transaction;
+                     return 
+                    //  homevalue.search.isEmpty ? Lottie.asset('assets/anm1.json') :
                      ListView.builder(
                        itemBuilder: (context, index) {
-                         final data = datavalue[index];
+                         final data = list[index];
                          return GestureDetector(
                            onTap: () { 
                              Navigator.push(context, MaterialPageRoute(builder: (context) =>  Details(
@@ -133,7 +137,7 @@ class HomeTab extends StatelessWidget {
                            ),
                          );
                        },
-                       itemCount: datavalue.length,
+                       itemCount: list.length,
                      );
                    },
                     ),

@@ -6,18 +6,19 @@ import 'package:provider/provider.dart';
 class HomeProvider extends ChangeNotifier{
 String search = "";
   List<TransactionModel> searchList = [];
-
-  void searchResult(BuildContext context, String value) {
-    var transactions = Provider.of<DbProvider>(context,listen:false).transaction;
-
-    searchList = transactions
-        .where((transaction) =>
-            transaction.discription.toLowerCase().contains(value.toLowerCase()))
-        .toList();
-
-    notifyListeners();
-  }
   
+  void searchResult(BuildContext context) {
+    final dbProvider = Provider.of<DbProvider>(context , listen: false);
+    final filteredExpense = dbProvider.transaction
+        .where((expenselist) => expenselist.discription
+            .toLowerCase()
+            .contains(search.toLowerCase()))
+        .toList();
+      
+
+
+    dbProvider.filteredSearch(filteredExpense);
+  }
 double bal(BuildContext context) {
     double currentbalance = 0.0;
     double income = 0.0;
@@ -56,9 +57,12 @@ delete(int index, BuildContext context){
                   onPressed: (){
                  Provider.of<DbProvider>(context,listen: false).deleteTransaction(index);
                   Navigator.pop(context);
+                  notifyListeners();
 
                 }, child: const Text("DELETE",)),
+              
         ],
+        
       );
     },
     );

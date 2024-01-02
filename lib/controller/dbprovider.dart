@@ -3,6 +3,7 @@ import 'package:mini/model/model.dart';
 import 'package:mini/service/service.dart';
 
 class DbProvider extends ChangeNotifier{
+  List<TransactionModel> filtered =[];
   List<TransactionModel> transaction = [];
   DbService dbservice = DbService();
 
@@ -24,5 +25,11 @@ class DbProvider extends ChangeNotifier{
   Future updateTransaction(TransactionModel value, index)async{
     await dbservice.updateTransaction(value, index);
     getAllTransactions();
+  }
+
+  void filteredSearch (List <TransactionModel> value) async {
+    filtered = value;
+    
+    notifyListeners();
   }
 }
