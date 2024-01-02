@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:mini/controller/dbprovider.dart';
 import 'package:mini/controller/homeprovider.dart';
 import 'package:mini/view/pages/details.dart';
