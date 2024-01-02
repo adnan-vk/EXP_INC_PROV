@@ -9,16 +9,14 @@ String search = "";
   
   void searchResult(BuildContext context) {
     final dbProvider = Provider.of<DbProvider>(context , listen: false);
-    final filteredExpense = dbProvider.transaction
-        .where((expenselist) => expenselist.discription
+    final filteredTransaction = dbProvider.transaction
+        .where((transactionlist) => transactionlist.discription
             .toLowerCase()
             .contains(search.toLowerCase()))
         .toList();
-      
-
-
-    dbProvider.filteredSearch(filteredExpense);
+    dbProvider.filteredSearch(filteredTransaction);
   }
+
 double bal(BuildContext context) {
     double currentbalance = 0.0;
     double income = 0.0;

@@ -28,5 +28,6 @@ final formKey = GlobalKey<FormState>();
     type.clear();
     date.clear();
     Navigator.pop(context);
+    notifyListeners();
   }
 }

@@ -29,7 +29,6 @@ class DbProvider extends ChangeNotifier{
 
   void filteredSearch (List <TransactionModel> value) async {
     filtered = value;
-    
     notifyListeners();
   }
 }
